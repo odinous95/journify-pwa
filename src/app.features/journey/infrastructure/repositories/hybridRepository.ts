@@ -1,4 +1,4 @@
-import { isOnline } from "../onlineStatus";
+import { isOnline } from "../connectivity/onlineStatus";
 import { IJourneyRepository } from "../../types";
 import { OfflineRepository } from "./offlineRepository";
 import { OnlineRepository } from "./onlineRepository";
