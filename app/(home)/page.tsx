@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSteps } from "./providers/JourneyProvider";
+import { useJourney } from "../providers/JourneyProvider";
 import { Step } from "@/src/view.models/StepVM";
 
 export default function Page() {
-  const { fetchSteps } = useSteps();
+  const { fetchSteps } = useJourney();
   const [steps, setSteps] = useState<Step[]>([]);
 
   useEffect(() => {

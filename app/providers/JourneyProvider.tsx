@@ -39,7 +39,7 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
     );
 }
 
-export function useSteps() {
+export function useJourney() {
     const ctx = useContext(JourneyContext);
     if (!ctx) throw new Error("JourneyProvider missing");
     return ctx;
