@@ -1,42 +1,46 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import {
-    createHybridRepository,
-    createStepFeature,
+    createJourneyFeature,
+    createJourneyService,
     OfflineRepository,
-    isOnline,
+    OnlineRepository,
 } from "@/src/app.features/journey";
+import { useOnlineStatus } from "@/src/hooks";
 
 
-const StepContext =
-    createContext<ReturnType<typeof createStepFeature> | null>(null);
+const JourneyContext =
+    createContext<ReturnType<typeof createJourneyFeature> | null>(null);
 
 export function JourneyProvider({ children }: { children: React.ReactNode }) {
+    const isOnline = useOnlineStatus();
     const [feature, setFeature] =
-        useState<ReturnType<typeof createStepFeature> | null>(null);
+        useState<ReturnType<typeof createJourneyFeature> | null>(null);
 
     useEffect(() => {
-        // 1️⃣ Create cache (browser-only)
-        const cache = new OfflineRepository();
+        const onlineRepo = new OnlineRepository();
+        const offlineRepo = new OfflineRepository();
 
-        // 2️⃣ Create hybrid repository (reads)
-        const repository = createHybridRepository();
+        const service = createJourneyService(
+            onlineRepo,
+            offlineRepo,
+            () => isOnline
+        );
 
-        // 3️⃣ Create feature with explicit policy
-        setFeature(createStepFeature(repository, cache, isOnline));
-    }, []);
+        setFeature(createJourneyFeature(service));
+    }, [isOnline]);
 
-    if (!feature) return null; // or loading state
+    if (!feature) return null;
 
     return (
-        <StepContext.Provider value={feature}>
+        <JourneyContext.Provider value={feature}>
             {children}
-        </StepContext.Provider>
+        </JourneyContext.Provider>
     );
 }
 
 export function useSteps() {
-    const ctx = useContext(StepContext);
+    const ctx = useContext(JourneyContext);
     if (!ctx) throw new Error("JourneyProvider missing");
     return ctx;
 }
