@@ -1,17 +1,9 @@
-import { IJourneyCache, IJourneyRepository } from "./types";
+import { createJourneyService } from "./service";
 
-export function createStepFeature(
-  repository: IJourneyRepository,
-  cache: IJourneyCache,
-  isOnline: () => boolean,
+export function createJourneyFeature(
+  service: ReturnType<typeof createJourneyService>,
 ) {
-  async function fetchSteps() {
-    const steps = await repository.getSteps();
-    if (isOnline()) {
-      await cache.saveSteps(steps);
-    }
-    return steps;
-  }
-
-  return { fetchSteps };
+  return {
+    fetchSteps: service.fetchSteps,
+  };
 }
