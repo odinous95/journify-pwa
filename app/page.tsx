@@ -1,8 +1,16 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-    </div>
-  );
+import { useEffect, useState } from "react";
+import { useSteps } from "./providers/JourneyProvider";
+import { Step } from "@/src/view.models/StepVM";
+
+export default function Page() {
+  const { fetchSteps } = useSteps();
+  const [steps, setSteps] = useState<Step[]>([]);
+
+  useEffect(() => {
+    fetchSteps().then(setSteps);
+  }, []);
+
+  return <pre>{JSON.stringify(steps, null, 2)}</pre>;
 }
