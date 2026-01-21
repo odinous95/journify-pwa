@@ -2,9 +2,9 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Offline Todo App",
-    short_name: "Todos",
-    description: "A todo app that works offline",
+    name: "Journify",
+    short_name: "Journify",
+    description: "Journify app is a todo app that works offline",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
