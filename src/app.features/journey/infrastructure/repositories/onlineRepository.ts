@@ -1,7 +1,7 @@
 import { Step } from "@/src/view.models";
-import { IJourneyRepository } from "../../types";
+import { IJourneyOnlineRepository } from "../../interfaces";
 
-export class OnlineRepository implements IJourneyRepository {
+export class OnlineRepository implements IJourneyOnlineRepository {
   async getSteps() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/step`);
     const json = await res.json();

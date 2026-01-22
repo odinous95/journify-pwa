@@ -1,13 +1,14 @@
 import { Step } from "@/src/view.models";
 import { OfflineRepository } from "./infrastructure/repositories/offlineRepository";
 import { OnlineRepository } from "./infrastructure/repositories/onlineRepository";
+import { IJourneyService } from "./interfaces";
 
 export function createJourneyService(
   onlineRepo: OnlineRepository,
   offlineRepo: OfflineRepository,
   isOnline: () => boolean,
-) {
-  async function fetchSteps() {
+): IJourneyService {
+  async function getSteps() {
     const localSteps = await offlineRepo.getSteps();
 
     if (isOnline()) {
@@ -28,11 +29,11 @@ export function createJourneyService(
     if (isOnline()) {
       await onlineRepo.addStep(step);
     }
-    await offlineRepo.addStep(step);
+    await offlineRepo.saveStep(step);
   }
 
   return {
-    fetchSteps,
+    getSteps,
     addStep,
   };
 }

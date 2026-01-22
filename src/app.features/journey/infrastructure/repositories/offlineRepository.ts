@@ -1,8 +1,8 @@
 import { openDB, IDBPDatabase } from "idb";
 import { Step } from "@/src/view.models";
-import { IJourneyCache, IJourneyRepository } from "../../types";
+import { IJourneyOfflineRepository } from "../../interfaces";
 
-export class OfflineRepository implements IJourneyRepository, IJourneyCache {
+export class OfflineRepository implements IJourneyOfflineRepository {
   private dbPromise?: Promise<IDBPDatabase>;
 
   private getDb() {
@@ -22,7 +22,7 @@ export class OfflineRepository implements IJourneyRepository, IJourneyCache {
     const db = await this.getDb();
     return db.getAll("steps");
   }
-  async addStep(step: Step) {
+  async saveStep(step: Step) {
     const db = await this.getDb();
     const tx = db.transaction("steps", "readwrite");
     await tx.store.put(step);

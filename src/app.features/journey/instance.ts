@@ -4,6 +4,6 @@ export function createJourneyFeature(
   service: ReturnType<typeof createJourneyService>,
 ) {
   return {
-    fetchSteps: service.fetchSteps,
+    getSteps: service.getSteps,
   };
 }
