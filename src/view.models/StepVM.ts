@@ -4,4 +4,5 @@ export type Step = {
   description: string;
   completed: boolean;
   createdlabel: string;
+  status?: "pending" | "synced";
 };
