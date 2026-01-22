@@ -1,3 +1,4 @@
+import { Step } from "@/src/view.models";
 import { OfflineRepository } from "./infrastructure/repositories/offlineRepository";
 import { OnlineRepository } from "./infrastructure/repositories/onlineRepository";
 
@@ -7,15 +8,31 @@ export function createJourneyService(
   isOnline: () => boolean,
 ) {
   async function fetchSteps() {
+    const localSteps = await offlineRepo.getSteps();
+
     if (isOnline()) {
-      const steps = await onlineRepo.getSteps();
-      await offlineRepo.saveSteps(steps);
-      return steps;
+      try {
+        const remoteSteps = await onlineRepo.getSteps();
+
+        await offlineRepo.saveSteps(remoteSteps);
+
+        return remoteSteps;
+      } catch (err) {
+        console.warn("Network failed, using local cache", err);
+      }
     }
-    return offlineRepo.getSteps();
+    return localSteps;
+  }
+
+  async function addStep(step: Step) {
+    if (isOnline()) {
+      await onlineRepo.addStep(step);
+    }
+    await offlineRepo.addStep(step);
   }
 
   return {
     fetchSteps,
+    addStep,
   };
 }
