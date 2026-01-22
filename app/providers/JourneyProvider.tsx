@@ -26,9 +26,8 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
             offlineRepo,
             () => isOnline
         );
-
         setFeature(createJourneyFeature(service));
-    }, [isOnline]);
+    }, []);
 
     if (!feature) return null;
 
