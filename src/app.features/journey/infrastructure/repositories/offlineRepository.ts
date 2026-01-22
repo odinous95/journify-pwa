@@ -22,6 +22,12 @@ export class OfflineRepository implements IJourneyRepository, IJourneyCache {
     const db = await this.getDb();
     return db.getAll("steps");
   }
+  async addStep(step: Step) {
+    const db = await this.getDb();
+    const tx = db.transaction("steps", "readwrite");
+    await tx.store.put(step);
+    await tx.done;
+  }
 
   async saveSteps(steps: Step[]) {
     const db = await this.getDb();
