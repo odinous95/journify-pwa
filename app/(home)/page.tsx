@@ -10,7 +10,7 @@ export default function Page() {
 
   useEffect(() => {
     getSteps().then(setSteps);
-  }, []);
+  }, [getSteps]);
 
   return <pre>{JSON.stringify(steps, null, 2)}</pre>;
 }
