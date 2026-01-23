@@ -1,12 +1,15 @@
 import { IJourneyRepository } from "./interfaces";
 
-export class Repository implements IJourneyRepository {
+export class JourneyRepository implements IJourneyRepository {
   async getDailyJourney() {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/dailyjourney`,
-    );
-    const json = await res.json();
-    console.log("Fetched steps from online repository:", json);
-    return json;
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/dailyjourney`,
+      );
+      return await res.json();
+    } catch (err) {
+      console.warn("Failed to fetch daily journey:", err);
+      return { dailyJourney: [] }; // fallback
+    }
   }
 }

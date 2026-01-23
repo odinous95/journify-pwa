@@ -1,6 +1,6 @@
-import { Repository } from "./repository";
+import { JourneyRepository } from "./repository";
 
-export function createJourneyService(repo: Repository) {
+export function createJourneyService(repo: JourneyRepository) {
   async function getDailyJourney() {
     return await repo.getDailyJourney();
   }
