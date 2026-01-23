@@ -16,7 +16,7 @@ export class JourneyRepository implements IJourneyRepository {
           userId: "00000000-0000-0000-0000-000000000000",
           journeyName: "Repository default Journey",
           createdAt: "2026-01-23T09:17:14.912215Z",
-          entries: [],
+          steps: [],
         },
       ];
     }

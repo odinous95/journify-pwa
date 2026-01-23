@@ -1,5 +1,7 @@
 // src/models/journey.model.ts
 
+import { mapStepToVM, Step, StepDTO } from "./Step";
+
 // ---------------------
 // Backend shape (DTO)
 // ---------------------
@@ -8,7 +10,7 @@ export type JourneyDTO = {
   userId: string;
   journeyName: string;
   createdAt: string;
-  entries: unknown[];
+  steps: StepDTO[];
 };
 
 // ---------------------
@@ -18,7 +20,8 @@ export type Journey = {
   id: string;
   title: string;
   createdAt: string;
-  entryCount: number;
+  stepCount: number;
+  steps?: Step[];
 };
 
 // ---------------------
@@ -29,6 +32,7 @@ export function mapJourneyToVM(dto: JourneyDTO): Journey {
     id: dto.id,
     title: dto.journeyName, // rename for UI
     createdAt: dto.createdAt,
-    entryCount: dto.entries.length, // example derived field
+    stepCount: dto.steps.length, // example derived field
+    steps: dto.steps?.map(mapStepToVM) ?? [],
   };
 }
