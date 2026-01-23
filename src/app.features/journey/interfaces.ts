@@ -1,7 +1,7 @@
-import { Journey } from "../../models";
+import { Journey, JourneyDTO } from "../../models";
 
 export interface IJourneyRepository {
-  getDailyJourney(): Promise<Journey>;
+  getDailyJourney(): Promise<JourneyDTO[]>;
 }
 
 export interface IJourneyService {
