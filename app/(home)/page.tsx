@@ -1,15 +1,18 @@
-export const dynamic = "force-dynamic";
-
+// export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 import { journeyFeature } from "@/src/app.features/journey";
+import { AddTodoForm } from "@/src/app.features/journey/ui/Journey/JourneyForm";
 import { ClientComponent } from "@/src/global.componentes/testcomponent";
 
 export default async function Page() {
   const dailyJourney = await journeyFeature.getDailyJourney();
-  console.log("Daily Journey in Page component:", dailyJourney);
   return (
     <>
       <ClientComponent />
-      <pre>{JSON.stringify(dailyJourney, null, 2)}</pre>
+      <AddTodoForm />
+      <div>
+        <h1>Daily Journey: {dailyJourney.title}</h1>
+      </div>
     </>
   );
 }
