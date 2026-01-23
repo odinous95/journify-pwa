@@ -1,10 +1,13 @@
+import { journeyFeature } from "@/src/app.features/journey";
 import { ClientComponent } from "@/src/global.componentes/testcomponent";
 
 export default async function Page() {
+  const dailyJourney = await journeyFeature.getDailyJourney();
+  console.log("Daily Journey in Page component:", dailyJourney);
   return (
     <>
       <ClientComponent />
-      <pre>{JSON.stringify("sdfa", null, 2)}</pre>
+      <pre>{JSON.stringify(dailyJourney, null, 2)}</pre>
     </>
   );
 }

@@ -3,7 +3,7 @@
 /// <reference lib="webworker" />
 import { defaultCache } from "@serwist/turbopack/worker";
 import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
-import { Serwist } from "serwist";
+import { ExpirationPlugin, NetworkFirst, Serwist } from "serwist";
 
 // This declares the value of `injectionPoint` to TypeScript.
 // `injectionPoint` is the string that will be replaced by the
@@ -22,11 +22,38 @@ const serwist = new Serwist({
   skipWaiting: true,
   clientsClaim: true,
   navigationPreload: true,
-  runtimeCaching: defaultCache,
+  runtimeCaching: [
+    ...defaultCache,
+    {
+      matcher({ url }) {
+        // Match the full backend endpoint
+        return (
+          url.href === `${process.env.NEXT_PUBLIC_BACKEND_URL}/dailyjourney`
+        );
+      },
+      method: "GET", // Optional, default is "GET"
+      handler: new NetworkFirst({
+        cacheName: "dailyjourney-api",
+        plugins: [
+          new ExpirationPlugin({
+            maxEntries: 50, // Max 50 cached responses
+            maxAgeSeconds: 12 * 60 * 60, // 12 hours
+          }),
+        ],
+        networkTimeoutSeconds: 5, // fallback to cache if server is slow
+      }),
+    },
+  ],
   fallbacks: {
     entries: [
       {
-        url: "/~offline",
+        url: "/about",
+        matcher({ request }) {
+          return request.destination === "document";
+        },
+      },
+      {
+        url: "/contact",
         matcher({ request }) {
           return request.destination === "document";
         },
