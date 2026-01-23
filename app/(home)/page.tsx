@@ -1,16 +1,10 @@
-"use client";
+import { ClientComponent } from "@/src/global.componentes/testcomponent";
 
-import { useEffect, useState } from "react";
-import { useJourney } from "../providers/JourneyProvider";
-import { Step } from "@/src/view.models/StepVM";
-
-export default function Page() {
-  const { getSteps } = useJourney();
-  const [steps, setSteps] = useState<Step[]>([]);
-
-  useEffect(() => {
-    getSteps().then(setSteps);
-  }, [getSteps]);
-
-  return <pre>{JSON.stringify(steps, null, 2)}</pre>;
+export default async function Page() {
+  return (
+    <>
+      <ClientComponent />
+      <pre>{JSON.stringify("sdfa", null, 2)}</pre>
+    </>
+  );
 }

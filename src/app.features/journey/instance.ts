@@ -1,9 +1,7 @@
-import { createJourneyService } from "./services/journifyService";
+import { IJourneyService } from "./interfaces";
 
-export function createJourneyFeature(
-  service: ReturnType<typeof createJourneyService>,
-) {
+export function createJourneyFeature(service: IJourneyService) {
   return {
-    getSteps: service.getSteps,
+    getDailyJourney: service.getDailyJourney,
   };
 }
