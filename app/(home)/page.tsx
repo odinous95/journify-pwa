@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { journeyFeature } from "@/src/app.features/journey";
 import { ClientComponent } from "@/src/global.componentes/testcomponent";
 
