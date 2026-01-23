@@ -10,7 +10,6 @@ export function AddTodoForm() {
     return (
         <form action={onSubmit}>
             <input name="title" />
-
             <button>Add</button>
         </form>
     );

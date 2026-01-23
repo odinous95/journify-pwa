@@ -6,7 +6,7 @@
 export type JourneyDTO = {
   id: string;
   userId: string;
-  jounreyName: string;
+  journeyName: string;
   createdAt: string;
   entries: unknown[];
 };
@@ -27,7 +27,7 @@ export type Journey = {
 export function mapJourneyToVM(dto: JourneyDTO): Journey {
   return {
     id: dto.id,
-    title: dto.jounreyName, // rename for UI
+    title: dto.journeyName, // rename for UI
     createdAt: dto.createdAt,
     entryCount: dto.entries.length, // example derived field
   };
