@@ -1,5 +1,5 @@
 import { IJourneyService } from "./interfaces";
-import { createJourneyService } from "./journifyService";
+import { createJourneyService } from "./service";
 import { JourneyRepository } from "./repository";
 
 export function createJourneyFeature(service: IJourneyService) {

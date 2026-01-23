@@ -5,11 +5,12 @@ export class JourneyRepository implements IJourneyRepository {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/dailyjourney`,
+        { next: { tags: ["dailyjourney"] } },
       );
       return await res.json();
     } catch (err) {
       console.warn("Failed to fetch daily journey:", err);
-      return { dailyJourney: [] }; // fallback
+      return { dailyJourney: [] };
     }
   }
 }
