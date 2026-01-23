@@ -1,4 +1,4 @@
-import { Journey } from "@/src/view.models";
+import { Journey } from "../../models";
 
 export interface IJourneyRepository {
   getDailyJourney(): Promise<Journey>;
