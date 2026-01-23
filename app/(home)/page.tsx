@@ -1,4 +1,4 @@
-// export const dynamic = "force-dynamic";
+
 export const revalidate = 3600;
 import { journeyFeature } from "@/src/app.features/journey";
 import { AddTodoForm } from "@/src/app.features/journey/ui/Journey/JourneyForm";
