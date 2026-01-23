@@ -26,24 +26,23 @@ const serwist = new Serwist({
     ...defaultCache,
     {
       matcher({ url }) {
-        // Match the full backend endpoint
         return (
           url.href === `${process.env.NEXT_PUBLIC_BACKEND_URL}/dailyjourney`
         );
       },
-      method: "GET", // Optional, default is "GET"
       handler: new NetworkFirst({
         cacheName: "dailyjourney-api",
         plugins: [
           new ExpirationPlugin({
-            maxEntries: 50, // Max 50 cached responses
-            maxAgeSeconds: 12 * 60 * 60, // 12 hours
+            maxEntries: 50,
+            maxAgeSeconds: 60, // short TTL for dynamic data
           }),
         ],
-        networkTimeoutSeconds: 5, // fallback to cache if server is slow
+        networkTimeoutSeconds: 10, // give network more time
       }),
     },
   ],
+
   fallbacks: {
     entries: [
       {
