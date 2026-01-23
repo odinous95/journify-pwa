@@ -1,6 +1,6 @@
 "use client";
 
-import { addTodo } from "@/app/(home)/action";
+import { addTodo } from "@/app/actions/action";
 
 export function AddTodoForm() {
     async function onSubmit(formData: FormData) {
