@@ -6,15 +6,15 @@ import { ClientComponent } from "@/src/global.componentes/testcomponent";
 
 export default async function Page() {
   const dailyJourney = await journeyFeature.getDailyJourney();
-  console.log("Daily Journey in Page component:", dailyJourney);
+  // console.log("Daily Journey in Page component:", dailyJourney);
   return (
     <>
       <ClientComponent />
-      <AddTodoForm />
+
       <div>
         <h1>{dailyJourney.title}</h1>
         <p>Steps: {dailyJourney.stepCount}</p>
-
+        <AddTodoForm />
         <ul>
           {dailyJourney?.steps?.map(step => (
             <li key={step.id}>
