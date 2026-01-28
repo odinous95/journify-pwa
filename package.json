@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^4.14.1",
     "idb": "^8.0.3",
+    "jwt-decode": "^4.0.0",
     "next": "16.1.4",
     "react": "19.2.3",
     "react-dom": "19.2.3"
@@ -17,6 +19,7 @@
   "devDependencies": {
     "@serwist/turbopack": "^9.5.0",
     "@tailwindcss/postcss": "^4",
+    "@types/jwt-decode": "^2.2.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
