@@ -1,26 +1,24 @@
-
 export const revalidate = 3600;
-import { journeyFeature } from "@/src/app.features/journey";
-import { AddTodoForm } from "@/src/app.features/journey/ui/Journey/JourneyForm";
-import { ClientComponent } from "@/src/global.componentes/testcomponent";
 
+import { auth0 } from "@/src/lib/auth0";
+import { AddDailyStepForm } from "@/src/app.features/journey/ui/JourneyForm";
+import { createJourneyFeatureWithToken } from "@/src/app.features/journey";
 export default async function Page() {
+  const journeyFeature = createJourneyFeatureWithToken((await auth0.getAccessToken()).token);
   const dailyJourney = await journeyFeature.getDailyJourney();
-  // console.log("Daily Journey in Page component:", dailyJourney);
+  console.log("Daily Journey:", dailyJourney);
+
   return (
     <>
-      <ClientComponent />
-
       <div>
         <h1>{dailyJourney.title}</h1>
         <p>Steps: {dailyJourney.stepCount}</p>
-        <AddTodoForm />
+        <AddDailyStepForm />
         <ul>
           {dailyJourney?.steps?.map(step => (
             <li key={step.id}>
               <strong>{step.title}</strong>
               <p>{step.description}</p>
-              <span>{step.completed ? "✅ Done" : "⏳ Pending"}</span>
             </li>
           ))}
         </ul>
