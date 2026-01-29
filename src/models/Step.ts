@@ -1,4 +1,7 @@
-export type StepDTO = {
+// ---------------------
+// Data/Model shape
+// ---------------------
+export type Step = {
   id: string;
   dailyJourneyId: string;
   title: string;
@@ -8,7 +11,10 @@ export type StepDTO = {
   lastUpdatedAt: string;
 };
 
-export type Step = {
+// ---------------------
+// UI/ViewModel shape
+// ---------------------
+export type StepVM = {
   id: string;
   title: string;
   description: string;
@@ -17,12 +23,15 @@ export type Step = {
   status?: "pending" | "synced";
 };
 
-export function mapStepToVM(dto: StepDTO): Step {
+// ---------------------
+// Mapper
+// ---------------------
+export function mapStepToVM(step: Step): StepVM {
   return {
-    id: dto.id,
-    title: dto.title,
-    description: dto.description,
-    completed: dto.isCompleted,
-    createdAt: dto.createdAt,
+    id: step.id,
+    title: step.title,
+    description: step.description,
+    completed: step.isCompleted,
+    createdAt: step.createdAt,
   };
 }

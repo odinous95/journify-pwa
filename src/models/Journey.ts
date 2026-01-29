@@ -1,38 +1,38 @@
 // src/models/journey.model.ts
 
-import { mapStepToVM, Step, StepDTO } from "./Step";
+import { mapStepToVM, Step, StepVM } from "./Step";
 
 // ---------------------
 // Backend shape (DTO)
 // ---------------------
-export type JourneyDTO = {
+export type Journey = {
   id: string;
   userId: string;
   journeyName: string;
   createdAt: string;
-  steps: StepDTO[];
+  steps: Step[];
 };
 
 // ---------------------
 // UI/ViewModel shape
 // ---------------------
-export type Journey = {
+export type JourneyVM = {
   id: string;
   title: string;
   createdAt: string;
   stepCount: number;
-  steps?: Step[];
+  steps?: StepVM[];
 };
 
 // ---------------------
 // Mapper
 // ---------------------
-export function mapJourneyToVM(dto: JourneyDTO): Journey {
+export function mapJourneyToVM(journey: Journey): JourneyVM {
   return {
-    id: dto.id,
-    title: dto.journeyName, // rename for UI
-    createdAt: dto.createdAt,
-    stepCount: dto.steps.length, // example derived field
-    steps: dto.steps?.map(mapStepToVM) ?? [],
+    id: journey.id,
+    title: journey.journeyName, // rename for UI
+    createdAt: journey.createdAt,
+    stepCount: journey.steps.length, // example derived field
+    steps: journey.steps?.map(mapStepToVM) ?? [],
   };
 }
