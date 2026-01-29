@@ -1,9 +1,19 @@
-import { Journey, JourneyDTO } from "../../models";
+import { Journey, JourneyVM, Step } from "../../models";
 
 export interface IJourneyRepository {
-  getDailyJourney(): Promise<JourneyDTO[]>;
+  getDailyJourney(): Promise<Journey[]>;
+  addDailyStep(step: Partial<Step>): Promise<Response>;
 }
 
 export interface IJourneyService {
-  getDailyJourney(): Promise<Journey>;
+  getDailyJourney(): Promise<JourneyVM>;
+  addDailyStep(data: Partial<Step>): Promise<ActionResponse>;
 }
+
+export interface ActionResponse<T = null> {
+  success: boolean;
+  message: string;
+  errors?: T;
+}
+
+export type AddDailyStepInput = Partial<Step>;
