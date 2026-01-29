@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background circle -->
+  <circle cx="96" cy="96" r="91" fill="none" stroke="#1f2937" stroke-width="2"/>
+  
+  <!-- Journal/Book pages -->
+  <path d="M 58 48 L 58 144 Q 58 153 67 153 L 125 153 Q 134 153 134 144 L 134 48 Q 134 39 125 39 L 67 39 Q 58 39 58 48 Z" 
+        fill="none" stroke="#1f2937" stroke-width="2.4" stroke-linejoin="round"/>
+  
+  <!-- Checkmarks for consistency -->
+  <g stroke="#1f2937" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M 72 72 L 79 82 L 92 67"/>
+    <path d="M 72 102 L 79 112 L 92 97"/>
+    <path d="M 72 132 L 79 142 L 92 127"/>
+  </g>
+  
+  <!-- Right side accent lines -->
+  <line x1="102" y1="72" x2="122" y2="72" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
+  <line x1="102" y1="102" x2="122" y2="102" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
+  <line x1="102" y1="132" x2="122" y2="132" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
+</svg>
