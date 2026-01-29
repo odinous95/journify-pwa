@@ -1,24 +1,55 @@
+import { Step } from "@/src/models";
 import { IJourneyRepository } from "./interfaces";
+import { auth0 } from "@/src/lib/auth0";
 
 export class JourneyRepository implements IJourneyRepository {
+  constructor(private readonly accessToken?: string) {}
+
   async getDailyJourney() {
+    console.log("Access Token in Repository:", this.accessToken);
     try {
+      const headers: HeadersInit = this.accessToken
+        ? { Authorization: `Bearer ${this.accessToken}` }
+        : {};
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/dailyjourney`,
-        { next: { tags: ["dailyjourney"] } },
+        {
+          next: { tags: ["dailyjourney"] },
+          headers,
+        },
       );
-      return await res.json();
+
+      if (!res.ok) {
+        console.warn("Failed to fetch daily journey:", res.status);
+        return [];
+      }
+
+      const text = await res.text();
+      if (!text) return [];
+
+      return JSON.parse(text);
     } catch (err) {
       console.warn("Failed to fetch daily journey:", err);
-      return [
-        {
-          id: "1166bee8-3d74-40d9-9d3e-3e29bc539d8e",
-          userId: "00000000-0000-0000-0000-000000000000",
-          journeyName: "Repository default Journey",
-          createdAt: "2026-01-23T09:17:14.912215Z",
-          steps: [],
-        },
-      ];
+      return [];
     }
+  }
+
+  async addDailyStep(step: Step) {
+    const headers: HeadersInit = {
+      "Content-Type": "application/json",
+      ...(this.accessToken
+        ? { Authorization: `Bearer ${this.accessToken}` }
+        : {}),
+    };
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/step/create`,
+      {
+        method: "POST",
+        headers,
+        body: JSON.stringify(step),
+      },
+    );
+    return response;
   }
 }
