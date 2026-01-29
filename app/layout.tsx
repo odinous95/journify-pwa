@@ -3,12 +3,14 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import Providers from "./providers";
+import Navbar from "../components/ui/navbar";
+import { AppContainer } from "@/components/ui/app-container";
+import "./globals.css";
 
-
-const APP_NAME = "PWA App";
-const APP_DEFAULT_TITLE = "My Awesome PWA App";
-const APP_TITLE_TEMPLATE = "%s - PWA App";
-const APP_DESCRIPTION = "Best PWA app in the world!";
+const APP_NAME = "Journify";
+const APP_DEFAULT_TITLE = "Journify - Track Your Journey";
+const APP_TITLE_TEMPLATE = "%s - Journify";
+const APP_DESCRIPTION = "Your personal journaling companion with consistency tracking!";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -56,7 +58,12 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar />
+          <AppContainer>
+            {children}
+          </AppContainer>
+        </Providers>
       </body>
     </html>
   );
