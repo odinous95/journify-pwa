@@ -6,7 +6,6 @@ export class JourneyRepository implements IJourneyRepository {
   constructor(private readonly accessToken?: string) {}
 
   async getDailyJourney() {
-    console.log("Access Token in Repository:", this.accessToken);
     try {
       const headers: HeadersInit = this.accessToken
         ? { Authorization: `Bearer ${this.accessToken}` }
