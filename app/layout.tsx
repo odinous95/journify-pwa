@@ -57,6 +57,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
+      <head>
+        <link rel="preload" href="/icons/journify-icon-light.svg" as="image" />
+      </head>
       <body>
         <Providers>
           <Navbar />
