@@ -3,7 +3,7 @@
 // ---------------------
 export type Step = {
   id: string;
-  dailyJourneyId: string;
+  journeyId: string;
   title: string;
   description: string;
   isCompleted: boolean;
