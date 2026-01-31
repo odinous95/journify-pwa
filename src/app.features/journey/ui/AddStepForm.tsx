@@ -1,11 +1,12 @@
 "use client";
 
 import { useActionState } from "react";
-import { addDailyStepAction } from "@/src/app.features/journey/server.actions/addStepAction";
 import { AlertMessage } from "@/components/ui/alert-message";
 import { InputField } from "@/components/ui/InputField";
+import { Button } from "@/components/ui/button";
+import { addDailyStepAction } from "../server.actions/addStepAction";
 
-export function AddDailyStepForm() {
+export function AddDailyStepForm({ dailyJourneyId }: { dailyJourneyId: string }) {
     const [state, formAction, isPending] = useActionState(addDailyStepAction, undefined);
 
     return (
@@ -22,7 +23,10 @@ export function AddDailyStepForm() {
                 label="Beskrivning"
                 disabled={isPending}
             />
-            <button disabled={isPending}>Add</button>
+            <input type="hidden" id="dailyJourneyId" name="dailyJourneyId" value={dailyJourneyId} />
+            <Button type="submit" disabled={isPending} className="w-full" size="lg">
+                Add
+            </Button>
             <AlertMessage state={state ?? { message: "" }} />
         </form>
     );

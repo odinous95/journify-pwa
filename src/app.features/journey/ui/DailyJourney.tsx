@@ -1,7 +1,8 @@
 import { auth0 } from "@/src/lib/auth0";
-import { createJourneyFeatureWithToken } from "../../instance";
+import { createJourneyFeatureWithToken } from "../instance";
+import { AddDailyStepForm, StepsContainer } from ".";
 
-export async function DailyJourneyServer() {
+export async function DailyJourney() {
     const session = await auth0.getSession();
 
     if (!session) {
@@ -17,15 +18,8 @@ export async function DailyJourneyServer() {
         <div>
             <h1>{dailyJourney.title}</h1>
             <p>Steps: {dailyJourney.stepCount}</p>
-
-            <ul>
-                {dailyJourney?.steps?.map((step) => (
-                    <li key={step.id}>
-                        <strong>{step.title}</strong>
-                        <p>{step.description}</p>
-                    </li>
-                ))}
-            </ul>
+            <AddDailyStepForm dailyJourneyId={dailyJourney.id} />
+            <StepsContainer steps={dailyJourney.steps} />
         </div>
     );
 }
